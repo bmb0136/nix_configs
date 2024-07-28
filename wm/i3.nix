@@ -23,6 +23,7 @@
         defaultWorkspace = "workspace number 1";
         keybindings = lib.mkOptionDefault {
           "${modifier}+Return" = "exec alacritty";
+          "${modifier}+Shift+Return" = "exec alacritty -e tmux";
         };
       };
     };
