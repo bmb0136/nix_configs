@@ -51,6 +51,13 @@
         wm = import ./wm/i3.nix;
         theme = "catppuccin";
       };
+      hp-laptop = mkSys {
+        system = "x86_64-linux";
+	base = ./systems/hp-laptop/configuration.nix;
+	users = [ "brandon" ];
+	wm = import ./wm/i3.nix;
+	theme = "catppuccin";
+      };
     };
   };
 }
