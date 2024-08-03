@@ -20,6 +20,12 @@
   };
   keymaps = [
     {
+      action = ":lua vim.lsp.buf.hover()";
+      key = "<C-h>";
+      mode = ["n" "i"];
+      options.silent = true;
+    }
+    {
       action = ":Neotree position=left toggle reveal<CR>";
       key = "<C-\\>";
       mode = "n";
