@@ -20,7 +20,7 @@
   };
   keymaps = [
     {
-      action = ":lua vim.lsp.buf.hover()";
+      action = ":lua vim.lsp.buf.hover()<CR>";
       key = "<C-h>";
       mode = ["n" "i"];
       options.silent = true;
