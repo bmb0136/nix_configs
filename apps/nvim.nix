@@ -20,12 +20,6 @@
   };
   keymaps = [
     {
-      action = ":lua vim.lsp.buf.hover()<CR>";
-      key = "<C-h>";
-      mode = ["n" "i"];
-      options.silent = true;
-    }
-    {
       action = ":Neotree position=left toggle reveal<CR>";
       key = "<C-\\>";
       mode = "n";
@@ -69,6 +63,10 @@
     neo-tree.enable = true;
     lsp = {
       enable = true;
+      keymaps.lspBuf = {
+        "<C-H>" = "hover";
+        "<C-.>" = "code_action";
+      };
       servers = {
         rust-analyzer = {
           enable = true;
