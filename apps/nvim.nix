@@ -22,7 +22,7 @@
     {
       action = ":lua vim.lsp.buf.code_action<CR>";
       key = "<A-CR>";
-      mode = [ "n" "i" ];
+      mode = "n";
       options.silent = true;
     }
     {
