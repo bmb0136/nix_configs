@@ -71,7 +71,6 @@
       enable = true;
       keymaps.lspBuf = {
         "<C-H>" = "hover";
-        "<C-.>" = "code_action";
       };
       servers = {
         rust-analyzer = {
