@@ -20,7 +20,7 @@
   };
   keymaps = [
     {
-      action = ":lua vim.lsp.buf.code_action<CR>";
+      action = ":lua vim.lsp.buf.code_action()<CR>";
       key = "<A-CR>";
       mode = "n";
       options.silent = true;
