@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
 
   networking.hostName = "hp-laptop";
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Chicago";
 
   environment.systemPackages = with pkgs; [
     brightnessctl
@@ -13,6 +13,11 @@
     enable = true;
     touchpad.naturalScrolling = true;
   };
+
+  security.pki.certificates = [
+    (builtins.readFile ../../certs/auburn.cer)
+    (builtins.readFile ../../certs/usertrust.pem)
+  ];
 
   hardware = {
     bluetooth.enable = true;

@@ -1,22 +1,21 @@
-{ wm, pkgs, lib, ... }:
+{ config, ... }:
 {
-  programs.home-manager.enable = true;
+  home-manager.sharedModules = [{
+    programs.tmux = {
+      enable = true;
+      baseIndex = 1;
+      escapeTime = 0;
+      extraConfig = ''
+      set-option -sa terminal-overrides ",xterm*:Tc"
+      '';
+    };
 
-  programs.tmux = {
-    enable = true;
-    baseIndex = 1;
-    escapeTime = 0;
-    extraConfig = ''
-    set-option -sa terminal-overrides ",xterm*:Tc"
-    '';
-  };
+    home.sessionVariables = {
+      EDITOR = "nvim";
+      BROWSER = "firefox";
+    };
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    BROWSER = "firefox";
-    TERMINAL = "alacritty";
-  };
-
-  programs.firefox.enable = true;
-  programs.alacritty.enable = true;
-} // wm.home
+    programs.firefox.enable = true;
+    programs.alacritty.enable = true;
+  }];
+}

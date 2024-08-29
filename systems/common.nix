@@ -1,4 +1,4 @@
-{ config, pkgs, wm, ... }:
+{ config, pkgs, ... }:
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -22,13 +22,14 @@
   services.xserver = {
     xkb.layout = "us";
     xkb.variant = "";
-    # Disable mouse acceleration if using a desktop
-    libinput = if config.services.xserver.enable then {
-      enable = true;
-      mouse.accelProfile = "flat";
-      touchpad.accelProfile = "flat";
-    } else {};
   };
+
+  # Disable mouse acceleration if using a desktop
+  services.libinput = if config.services.xserver.enable then {
+    enable = true;
+    mouse.accelProfile = "flat";
+    touchpad.accelProfile = "flat";
+  } else {};
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -41,6 +42,4 @@
     fastfetch
     git
   ];
-
-  programs.nixvim = import ../apps/nvim.nix { inherit pkgs; };
-} // wm.system
+}
