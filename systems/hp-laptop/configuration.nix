@@ -5,9 +5,7 @@
   networking.hostName = "hp-laptop";
   time.timeZone = "America/Chicago";
 
-  environment.systemPackages = with pkgs; [
-    brightnessctl
-  ];
+  environment.systemPackages = with pkgs; [ brightnessctl ];
 
   services.libinput = {
     enable = true;

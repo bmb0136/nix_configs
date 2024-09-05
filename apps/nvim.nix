@@ -1,26 +1,24 @@
 { inputs, pkgs, ... }:
 {
-  imports = [
-    inputs.nixvim.nixosModules.nixvim
-  ];
+  imports = [ inputs.nixvim.nixosModules.nixvim ];
 
   config.programs.nixvim = {
     enable = true;
     defaultEditor = true;
     opts = {
       updatetime = 100;
-  
+
       # Display
       relativenumber = true;
       number = true;
       wrap = false;
-  
+
       # Tabs
       tabstop = 2;
       shiftwidth = 2;
       expandtab = true;
       autoindent = true;
-  
+
       foldlevel = 999;
       mouse = "";
     };

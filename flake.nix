@@ -21,36 +21,41 @@
     };
   };
 
-  outputs = { ... } @ inputs: let 
-    lib = inputs.nixpkgs.lib;
-  in {
-    nixosConfigurations = let
-      specialArgs = {
-        inherit inputs;
-        outputs = inputs.self.outputs;
-      };
-      commonModules = [
-        ./apps/nvim.nix
-        ./users/common.nix
-        ./systems/common.nix
-        inputs.home-manager.nixosModules.home-manager
+  outputs =
+    { ... }@inputs:
+    let
+      lib = inputs.nixpkgs.lib;
+    in
+    {
+      nixosConfigurations =
+        let
+          specialArgs = {
+            inherit inputs;
+            outputs = inputs.self.outputs;
+          };
+          commonModules = [
+            ./apps/nvim.nix
+            ./users/common.nix
+            ./systems/common.nix
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = specialArgs;
+            }
+          ];
+        in
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = specialArgs;
-        }
-      ];
-    in {
-      hp-laptop = lib.nixosSystem {
-        system = "x86_64-linux";
-        inherit specialArgs;
-        modules = [
-          ./systems/hp-laptop/configuration.nix
-          ./users/brandon.nix
-          ./themes/catppuccin.nix
-          ./wm/i3.nix
-        ] ++ commonModules;
-      };
+          hp-laptop = lib.nixosSystem {
+            system = "x86_64-linux";
+            inherit specialArgs;
+            modules = [
+              ./systems/hp-laptop/configuration.nix
+              ./users/brandon.nix
+              ./themes/catppuccin.nix
+              ./wm/i3.nix
+            ] ++ commonModules;
+          };
+        };
     };
-  };
 }
