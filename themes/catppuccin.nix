@@ -20,12 +20,6 @@
       };
       opacity.applications = opacity;
     };
-    services.xserver.displayManager.lightdm = {
-      greeters = {
-        gtk.enable = false;
-        slick.enable = true;
-      };
-    };
     programs.nixvim = {
       plugins.transparent.enable = true;
       autoCmd = [
