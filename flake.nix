@@ -34,7 +34,7 @@
           outputs = inputs.self.outputs;
         };
         commonModules = [
-          ./apps/nvim.nix
+          ./apps/common.nix
           ./users/common.nix
           ./systems/common.nix
           inputs.home-manager.nixosModules.home-manager
@@ -59,12 +59,15 @@
           system = "x86_64-linux";
           inherit specialArgs;
           modules = [
+            ./apps/common.nix
+            ./users/common.nix
+            ./themes/catppuccin.nix
             inputs.nixos-wsl.nixosModules.default
             {
               system.stateVersion = "24.05";
               wsl.enable = true;
             }
-          ] ++ commonModules;
+          ];
         };
       };
     };
