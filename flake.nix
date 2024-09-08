@@ -68,6 +68,7 @@
               system.stateVersion = "24.05";
               wsl.enable = true;
               wsl.defaultUser = "brandon";
+              networking.hostName = "wsl";
             }
             inputs.home-manager.nixosModules.home-manager
             {
