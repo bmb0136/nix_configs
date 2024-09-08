@@ -66,6 +66,12 @@
               system.stateVersion = "24.05";
               wsl.enable = true;
             }
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = specialArgs;
+            }
           ];
         };
       };
