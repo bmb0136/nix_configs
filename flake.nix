@@ -19,6 +19,8 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
   outputs =
@@ -54,6 +56,17 @@
               ./users/brandon.nix
               ./themes/catppuccin.nix
               ./wm/i3.nix
+            ] ++ commonModules;
+          };
+          wsl = lib.nixosSystem {
+            system = "x86_64-linux";
+            inherit specialArgs;
+            modules = [
+              inputs.nixos-wsl.nixosModules.default
+              {
+                system.stateVersion = "24.05";
+                wsl.enable = true;
+              }
             ] ++ commonModules;
           };
         };
