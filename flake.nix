@@ -29,6 +29,7 @@
       lib = inputs.nixpkgs.lib;
     in
     {
+      formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt;
       nixosConfigurations =
         let
           specialArgs = {
