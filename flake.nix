@@ -61,11 +61,13 @@
           modules = [
             ./apps/common.nix
             ./users/common.nix
+            ./users/brandon.nix
             ./themes/catppuccin.nix
             inputs.nixos-wsl.nixosModules.default
             {
               system.stateVersion = "24.05";
               wsl.enable = true;
+              wsl.defaultUser = "brandon";
             }
             inputs.home-manager.nixosModules.home-manager
             {
