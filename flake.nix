@@ -61,6 +61,7 @@
           modules = [
             ./apps/common.nix
             ./users/common.nix
+            ./themes/catppuccin.nix
             inputs.nixos-wsl.nixosModules.default
             {
               system.stateVersion = "24.05";
