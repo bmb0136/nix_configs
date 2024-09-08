@@ -1,5 +1,4 @@
-{ inputs, pkgs, ... }:
-{
+{ inputs, pkgs, ... }: {
   imports = [ inputs.nixvim.nixosModules.nixvim ];
 
   config.programs.nixvim = {
@@ -78,16 +77,15 @@
           clangd.enable = true;
         };
       };
-      lsp-lines = {
-        enable = true;
-      };
+      lsp-lines = { enable = true; };
       cmp-nvim-lsp.enable = true;
       cmp_luasnip.enable = true;
       cmp = {
         enable = true;
         autoEnableSources = true;
         settings = {
-          snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+          snippet.expand =
+            "function(args) require('luasnip').lsp_expand(args.body) end";
           completion.completeopt = "menu,menuone,noinsert";
           formatting.format = ''
             function (entry, vim_item)
@@ -104,11 +102,8 @@
             "<CR>" = "cmp.mapping.confirm({ select = true })";
             "<Tab>" = "cmp.mapping.confirm({ select = true })";
           };
-          sources = [
-            { name = "path"; }
-            { name = "nvim_lsp"; }
-            { name = "luasnip"; }
-          ];
+          sources =
+            [ { name = "path"; } { name = "nvim_lsp"; } { name = "luasnip"; } ];
         };
       };
     };

@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
   networking.hostName = "hp-laptop";

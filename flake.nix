@@ -23,53 +23,49 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
-  outputs =
-    { ... }@inputs:
-    let
-      lib = inputs.nixpkgs.lib;
-    in
-    {
-      formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt;
-      nixosConfigurations =
-        let
-          specialArgs = {
-            inherit inputs;
-            outputs = inputs.self.outputs;
-          };
-          commonModules = [
-            ./apps/nvim.nix
-            ./users/common.nix
-            ./systems/common.nix
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = specialArgs;
-            }
-          ];
-        in
-        {
-          hp-laptop = lib.nixosSystem {
-            system = "x86_64-linux";
-            inherit specialArgs;
-            modules = [
-              ./systems/hp-laptop/configuration.nix
-              ./users/brandon.nix
-              ./themes/catppuccin.nix
-              ./wm/i3.nix
-            ] ++ commonModules;
-          };
-          wsl = lib.nixosSystem {
-            system = "x86_64-linux";
-            inherit specialArgs;
-            modules = [
-              inputs.nixos-wsl.nixosModules.default
-              {
-                system.stateVersion = "24.05";
-                wsl.enable = true;
-              }
-            ] ++ commonModules;
-          };
+  outputs = { ... }@inputs:
+    let lib = inputs.nixpkgs.lib;
+    in {
+      formatter.x86_64-linux =
+        inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt-classic;
+      nixosConfigurations = let
+        specialArgs = {
+          inherit inputs;
+          outputs = inputs.self.outputs;
         };
+        commonModules = [
+          ./apps/nvim.nix
+          ./users/common.nix
+          ./systems/common.nix
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = specialArgs;
+          }
+        ];
+      in {
+        hp-laptop = lib.nixosSystem {
+          system = "x86_64-linux";
+          inherit specialArgs;
+          modules = [
+            ./systems/hp-laptop/configuration.nix
+            ./users/brandon.nix
+            ./themes/catppuccin.nix
+            ./wm/i3.nix
+          ] ++ commonModules;
+        };
+        wsl = lib.nixosSystem {
+          system = "x86_64-linux";
+          inherit specialArgs;
+          modules = [
+            inputs.nixos-wsl.nixosModules.default
+            {
+              system.stateVersion = "24.05";
+              wsl.enable = true;
+            }
+          ] ++ commonModules;
+        };
+      };
     };
 }
