@@ -11,6 +11,13 @@
     touchpad.naturalScrolling = true;
   };
 
+  systemd.services.no-touchscreen-pls = {
+    script = ''
+      ${pkgs.xorg.xinput} disable "eGalax Inc. eGalaxTouch EXC3200-2505-09.00.00.00
+    '';
+    wantedBy = [ "graphical-session.target" ];
+  };
+
   security.pki.certificates = [
     (builtins.readFile ../../certs/auburn.cer)
     (builtins.readFile ../../certs/usertrust.pem)
