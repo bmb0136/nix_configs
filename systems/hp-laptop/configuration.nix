@@ -12,7 +12,7 @@
   };
 
   services.xserver.displayManager.setupCommands = ''
-    ${pkgs.xorg.xinput} disable 10
+    ${pkgs.xorg.xinput}/bin/xinput disable 10
   '';
 
   security.pki.certificates = [
