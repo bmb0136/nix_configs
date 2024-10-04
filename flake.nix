@@ -69,6 +69,7 @@
               wsl.enable = true;
               wsl.defaultUser = "brandon";
               networking.hostName = "wsl";
+              nix.settings.experimental-features = [ "nix-command" "flakes" ];
             }
             inputs.home-manager.nixosModules.home-manager
             {
