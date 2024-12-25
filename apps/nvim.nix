@@ -53,7 +53,7 @@
       bufferline.enable = true;
       lualine = {
         enable = true;
-        sections.lualine_c = [ "lsp_progress" ];
+        settings.sections.lualine_c = [ "lsp_progress" ];
       };
       treesitter = {
         enable = true;
@@ -67,13 +67,13 @@
       lsp = {
         enable = true;
         servers = {
-          rust-analyzer = {
+          rust_analyzer = {
             enable = true;
             installCargo = false;
             installRustc = false;
           };
           nixd.enable = true;
-          csharp-ls.enable = true;
+          csharp_ls.enable = true;
           clangd.enable = true;
         };
       };

@@ -9,8 +9,9 @@
         "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
       fonts = {
         monospace = {
-          package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
-          name = "JetBrainsMono Nerd Font";
+          # package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+          package = pkgs.nerd-fonts.jetbrains-mono;
+          name = "JetBrainsMono Nerd Font";  
         };
       };
       opacity.applications = opacity;
