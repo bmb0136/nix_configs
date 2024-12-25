@@ -55,6 +55,15 @@
             ./wm/i3.nix
           ] ++ commonModules;
         };
+        manta = lib.nixosSystem {
+          system = "x86_64-linux";
+          inherit specialArgs;
+          modules = [
+            ./themes/catppuccin.nix
+            ./users/jelly.nix
+            ./systems/manta/configuration.nix
+          ] ++ commonModules;
+        };
         wsl = lib.nixosSystem {
           system = "x86_64-linux";
           inherit specialArgs;

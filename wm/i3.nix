@@ -10,8 +10,7 @@
     services.displayManager = { defaultSession = "none+i3"; };
     services.picom.enable = true;
     home-manager.sharedModules = [
-      (let
-        locker = "${pkgs.i3lock-fancy}/bin/i3lock";
+      (let locker = "${pkgs.i3lock-fancy}/bin/i3lock";
       in {
         services.screen-locker = {
           enable = true;
@@ -31,6 +30,7 @@
             };
           };
         };
-      })];
+      })
+    ];
   };
 }
