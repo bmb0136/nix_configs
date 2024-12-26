@@ -63,7 +63,10 @@
   # };
 
   # List services that you want to enable:
-  services.zerotierone.enable = true;
+  services.zerotierone = {
+    enable = true;
+    joinNetworks = [ "0cccb752f7bad052" ];
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
