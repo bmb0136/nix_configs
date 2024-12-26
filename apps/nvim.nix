@@ -64,6 +64,7 @@
       };
       luasnip.enable = true;
       neo-tree.enable = true;
+      web-devicons.enable = true;
       lsp = {
         enable = true;
         servers = {
