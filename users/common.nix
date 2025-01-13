@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ ... }: {
   home-manager.sharedModules = [{
     programs.tmux = {
       enable = true;
@@ -13,8 +13,5 @@
       EDITOR = "nvim";
       BROWSER = "firefox";
     };
-
-    programs.firefox.enable = true;
-    programs.alacritty.enable = true;
   }];
 }
