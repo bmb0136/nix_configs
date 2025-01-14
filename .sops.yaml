@@ -1,9 +1,11 @@
 keys:
   - &brandon age1ufx6emau9fphkcpvgyf34g5aqt9fh5pr2n2jkzk86mpnq0h4a55q6wsnvu
   - &hp-laptop age1yca6gg6kmasxcus9n5j9qkrvcqa2a9q44hk9yl7tuf9k2z6euvss4pna4m
+  - &hp-laptop-wsl age1dwvdwhz8fy26jtdjjfafnpwf0s983nmdd4v4pm4xv3n2xcjgdc6q6e9nf9
 creation_rules:
   - path_regex: users/secrets/brandon.yaml$
     key_groups:
       - age:
         - *brandon
         - *hp-laptop
+        - *hp-laptop-wsl
