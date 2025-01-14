@@ -15,8 +15,14 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    # TODO REMOVE THIS (use nvf instead)
     nixvim = {
       url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nvf = {
+      url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -29,10 +35,17 @@
   };
 
   outputs = { ... }@inputs:
-    let lib = inputs.nixpkgs.lib;
+    let
+      lib = inputs.nixpkgs.lib;
     in {
       formatter.x86_64-linux =
         inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt-classic;
+
+      packages."x86_64-linux".nvfConfig = (inputs.nvf.lib.neovimConfiguration {
+        inherit (inputs.nixpkgs.legacyPackages."x86_64-linux") pkgs;
+        modules = [ ./apps/nvf ];
+      }).neovim;
+
       nixosConfigurations = let
         specialArgs = {
           inherit inputs;
