@@ -13,7 +13,7 @@
     };
 
     binds = {
-      whichkey.enable = true;
+      whichKey.enable = true;
       cheatsheet.enable = true;
     };
 
