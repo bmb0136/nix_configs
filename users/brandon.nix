@@ -17,4 +17,9 @@
     owner = "brandon";
     group = "brandon";
   };
+  sops.secrets.github_pub_key = {
+    path = "/home/brandon/.ssh/id_git.pub";
+    owner = "brandon";
+    group = "brandon";
+  };
 }

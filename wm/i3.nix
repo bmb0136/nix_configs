@@ -1,7 +1,5 @@
 { pkgs, lib, ... }: {
-  imports = [
-    ./desktop_apps.nix
-  ];
+  imports = [ ./desktop_apps.nix ];
   config = {
     services.xserver = {
       enable = true;
