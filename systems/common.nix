@@ -23,6 +23,8 @@
     xkb.variant = "";
   };
 
+  programs.ssh.startAgent = true;
+
   # Disable mouse acceleration if using a desktop
   services.libinput = if config.services.xserver.enable then {
     enable = true;
