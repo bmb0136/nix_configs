@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   users.users.brandon = {
     isNormalUser = true;
     home = "/home/brandon";
@@ -15,11 +15,13 @@
   sops.secrets.github_key = {
     sopsFile = ./secrets/brandon.yaml;
     path = "/home/brandon/.ssh/id_git";
-    owner = "brandon";
+    owner = config.users.users.brandon.name;
+    group = config.users.users.brandon.group;
   };
   sops.secrets.github_pub_key = {
     sopsFile = ./secrets/brandon.yaml;
     path = "/home/brandon/.ssh/id_git.pub";
-    owner = "brandon";
+    owner = config.users.users.brandon.name;
+    group = config.users.users.brandon.group;
   };
 }
