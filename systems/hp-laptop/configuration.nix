@@ -1,12 +1,12 @@
-{pkgs, ...}: {
-  imports = [./hardware-configuration.nix];
+{ pkgs, ... }: {
+  imports = [ ./hardware-configuration.nix ];
 
   networking.hostName = "hp-laptop";
   time.timeZone = "America/Chicago";
 
-  environment.systemPackages = with pkgs; [brightnessctl];
+  environment.systemPackages = with pkgs; [ brightnessctl ];
 
-  sops.age.sshKeyPaths = ["/var/lib/sops-nix/ssh_host_ed25519_key"];
+  sops.age.sshKeyPaths = [ "/var/lib/sops-nix/ssh_host_ed25519_key" ];
 
   services.libinput = {
     enable = true;

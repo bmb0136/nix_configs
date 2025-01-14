@@ -1,8 +1,5 @@
 { ... }: {
-  imports = [
-    ./langs.nix
-    ./files.nix
-  ];
+  imports = [ ./langs.nix ./files.nix ];
 
   config.vim = {
     theme = {
