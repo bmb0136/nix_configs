@@ -17,7 +17,9 @@
       cheatsheet.enable = true;
     };
 
-    tabstop = 2;
-    shiftwidth = 2;
+    options = {
+      tabstop = 2;
+      shiftwidth = 2;
+    };
   };
 }
