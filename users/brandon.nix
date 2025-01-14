@@ -13,13 +13,13 @@
     xsession.windowManager.i3.enable = true;
   };
   sops.secrets.github_key = {
+    sopsFile = ./secrets/brandon.yaml;
     path = "/home/brandon/.ssh/id_git";
     owner = "brandon";
-    group = "brandon";
   };
   sops.secrets.github_pub_key = {
+    sopsFile = ./secrets/brandon.yaml;
     path = "/home/brandon/.ssh/id_git.pub";
     owner = "brandon";
-    group = "brandon";
   };
 }

@@ -6,7 +6,6 @@
 
   environment.systemPackages = with pkgs; [ brightnessctl ];
 
-  sops.defaultSopsFile = ./secrets.yaml;
   sops.age.sshKeyPaths = [ "/var/lib/sops-nix/ssh_host_e25519_key" ];
 
   services.libinput = {
