@@ -18,7 +18,7 @@
       owner = config.users.users.brandon.name;
       group = config.users.users.brandon.group;
     };
-  in builtins.mapAttrs (x: x // base) {
+  in builtins.mapAttrs (_: x: x // base) {
     github_key.path = "/home/brandon/.ssh/id_git";
     github_pub_key.path = "/home/brandon/.ssh/id_git.pub";
   };
