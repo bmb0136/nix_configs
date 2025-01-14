@@ -12,16 +12,14 @@
     programs.home-manager.enable = true;
     xsession.windowManager.i3.enable = true;
   };
-  sops.secrets.github_key = {
-    sopsFile = ./secrets/brandon.yaml;
-    path = "/home/brandon/.ssh/id_git";
-    owner = config.users.users.brandon.name;
-    group = config.users.users.brandon.group;
-  };
-  sops.secrets.github_pub_key = {
-    sopsFile = ./secrets/brandon.yaml;
-    path = "/home/brandon/.ssh/id_git.pub";
-    owner = config.users.users.brandon.name;
-    group = config.users.users.brandon.group;
+  sops.secrets = let
+    base = {
+      sopsFile = ./secrets/brandon.yaml;
+      owner = config.users.users.brandon.name;
+      group = config.users.users.brandon.group;
+    };
+  in builtins.mapAttrs (x: x // base) {
+    github_key.path = "/home/brandon/.ssh/id_git";
+    github_pub_key.path = "/home/brandon/.ssh/id_git.pub";
   };
 }
