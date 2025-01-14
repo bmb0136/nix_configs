@@ -12,4 +12,9 @@
     programs.home-manager.enable = true;
     xsession.windowManager.i3.enable = true;
   };
+  sops.secrets.github_key = {
+    path = "/home/brandon/.ssh/id_git";
+    owner = "brandon";
+    group = "brandon";
+  };
 }
