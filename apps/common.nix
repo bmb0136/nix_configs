@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./nvim.nix ];
+  imports = [ ./nvf.nix ];
 
   environment.systemPackages = with pkgs; [ tmux neovim htop fastfetch git ];
 }

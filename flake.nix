@@ -15,12 +15,6 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    # TODO REMOVE THIS (use nvf instead)
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nvf = {
       url = "github:NotAShelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -52,6 +46,7 @@
           outputs = inputs.self.outputs;
         };
         commonModules = [
+          inputs.nvf.nixosModules.default
           inputs.sops-nix.nixosModules.sops
           ./apps/common.nix
           ./users/common.nix
