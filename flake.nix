@@ -82,6 +82,7 @@
           system = "x86_64-linux";
           inherit specialArgs;
           modules = [
+            inputs.sops-nix.nixosModules.sops
             ./apps/common.nix
             ./users/common.nix
             ./users/brandon.nix
