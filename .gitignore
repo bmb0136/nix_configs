@@ -1,2 +1,5 @@
 # Output of `nix build`
 result
+
+# Backup from nvim
+*~
