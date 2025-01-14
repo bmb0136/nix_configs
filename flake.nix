@@ -46,9 +46,6 @@
         };
         commonModules = [
           inputs.sops-nix.nixosModules.sops
-          {
-            sops.age.sshKeyPaths = [ "/var/lib/sops-nix/ssh_host_ed25519_key" ];
-          }
           ./apps/common.nix
           ./users/common.nix
           ./systems/common.nix
@@ -86,6 +83,9 @@
           inherit specialArgs;
           modules = [
             inputs.sops-nix.nixosModules.sops
+            {
+              sops.age.sshKeyPaths = [ "/var/lib/sops-nix/ssh_host_ed25519_key" ];
+            }
             ./apps/common.nix
             ./users/common.nix
             ./users/brandon.nix
