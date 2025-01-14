@@ -35,10 +35,10 @@
       formatter.x86_64-linux =
         inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt-classic;
 
-      packages."x86_64-linux".nvfConfig = (inputs.nvf.lib.neovimConfiguration {
+      packages."x86_64-linux".nvfConfig = inputs.nvf.lib.neovimConfiguration {
         inherit (inputs.nixpkgs.legacyPackages."x86_64-linux") pkgs;
         modules = [ ./apps/nvf ];
-      }).neovim;
+      };
 
       nixosConfigurations = let
         specialArgs = {
@@ -46,7 +46,6 @@
           outputs = inputs.self.outputs;
         };
         commonModules = [
-          inputs.nvf.nixosModules.default
           inputs.sops-nix.nixosModules.sops
           ./apps/common.nix
           ./users/common.nix
