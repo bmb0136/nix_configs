@@ -6,6 +6,8 @@
 
   environment.systemPackages = with pkgs; [ brightnessctl ];
 
+  sops.defaultSopsFile = ./secrets.yaml;
+
   services.libinput = {
     enable = true;
     touchpad.naturalScrolling = true;
