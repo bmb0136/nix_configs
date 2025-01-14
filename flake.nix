@@ -20,6 +20,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
@@ -34,6 +39,7 @@
           outputs = inputs.self.outputs;
         };
         commonModules = [
+          inputs.sops-nix.nixosModules.sops
           ./apps/common.nix
           ./users/common.nix
           ./systems/common.nix
