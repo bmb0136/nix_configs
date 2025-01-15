@@ -27,9 +27,9 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
-    flake-utils.url = "github:numtide/flake-utils";
-
     flake-parts.url = "github:hercules-ci/flake-parts";
+
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   outputs =
@@ -38,8 +38,14 @@
       systems = [ "x86_64-linux" ];
       perSystem =
         { pkgs, ... }:
+        let
+          treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+        in
         {
-          formatter = pkgs.nixfmt-rfc-style;
+          formatter = treefmtEval.config.build.wrapper;
+          checks = {
+            formatting = treefmtEval.${pkgs.system}.config.build.check inputs.self;
+          };
 
           packages.nvfConfig = inputs.nvf.lib.neovimConfiguration {
             inherit pkgs;
