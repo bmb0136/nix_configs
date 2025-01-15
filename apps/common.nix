@@ -1,4 +1,8 @@
-{ pkgs, outputs, ... }:
+{
+  pkgs,
+  outputs,
+  ...
+}:
 {
   environment.systemPackages =
     with pkgs;
@@ -9,5 +13,5 @@
       fastfetch
       git
     ]
-    ++ [ outputs.packages.${pkgs.system}.nvfConfig.neovim ];
+    ++ [ outputs.packages.${pkgs.system}.nvfConfig ];
 }

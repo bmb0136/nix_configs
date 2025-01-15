@@ -44,10 +44,11 @@
         {
           treefmt = import ./treefmt.nix;
 
-          packages.nvfConfig = inputs.nvf.lib.neovimConfiguration {
-            inherit pkgs;
-            modules = [ ./apps/nvf ];
-          };
+          packages.nvfConfig =
+            (inputs.nvf.lib.neovimConfiguration {
+              inherit pkgs;
+              modules = [ ./apps/nvf ];
+            }).neovim;
         };
       flake = {
         nixosConfigurations =
