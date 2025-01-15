@@ -1,6 +1,14 @@
-{ ... }: {
+_: {
   config.vim = {
     filetree.neo-tree.enable = true;
+    keymaps = [
+      {
+        key = "<C-\\>";
+        mode = ["n"];
+        action = ":Neotree toggle=true";
+        silent = true;
+      }
+    ];
     tabline.nvimBufferline = {
       enable = true;
       mappings = {
