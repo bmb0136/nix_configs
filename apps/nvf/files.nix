@@ -5,7 +5,7 @@ _: {
       {
         key = "<C-\\>";
         mode = ["n"];
-        action = ":Neotree toggle=true";
+        action = ":Neotree toggle=true<CR>";
         silent = true;
       }
     ];
