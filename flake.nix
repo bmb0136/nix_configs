@@ -35,17 +35,14 @@
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.treefmt-nix.flakeModule
+      ];
       systems = [ "x86_64-linux" ];
       perSystem =
         { pkgs, ... }:
-        let
-          treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
-        in
         {
-          formatter = treefmtEval.config.build.wrapper;
-          checks = {
-            formatting = treefmtEval.${pkgs.system}.config.build.check inputs.self;
-          };
+          treefmt = import ./treefmt.nix;
 
           packages.nvfConfig = inputs.nvf.lib.neovimConfiguration {
             inherit pkgs;
