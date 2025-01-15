@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   config.vim = {
     languages = {
       enableLSP = true;

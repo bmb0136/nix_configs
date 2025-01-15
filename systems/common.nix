@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -27,14 +28,18 @@
 
   # Disable mouse acceleration if using a desktop
   services.libinput =
-    if config.services.xserver.enable
-    then {
-      enable = true;
-      mouse.accelProfile = "flat";
-      touchpad.accelProfile = "flat";
-    }
-    else {};
+    if config.services.xserver.enable then
+      {
+        enable = true;
+        mouse.accelProfile = "flat";
+        touchpad.accelProfile = "flat";
+      }
+    else
+      { };
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 }

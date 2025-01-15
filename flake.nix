@@ -26,95 +26,104 @@
     };
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+
+    flake-utils.url = "github:numtide/flake-utils";
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = inputs: let
-    inherit (inputs.nixpkgs) lib;
-  in {
-    formatter.x86_64-linux =
-      inputs.nixpkgs.legacyPackages.x86_64-linux.nixfmt-classic;
-
-    packages."x86_64-linux".nvfConfig = inputs.nvf.lib.neovimConfiguration {
-      inherit (inputs.nixpkgs.legacyPackages."x86_64-linux") pkgs;
-      modules = [./apps/nvf];
-    };
-
-    nixosConfigurations = let
-      specialArgs = {
-        inherit inputs;
-        inherit (inputs.self) outputs;
-      };
-      commonModules = [
-        inputs.sops-nix.nixosModules.sops
-        ./apps/common.nix
-        ./users/common.nix
-        ./systems/common.nix
-        inputs.home-manager.nixosModules.home-manager
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
+      perSystem =
+        { pkgs, ... }:
         {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = specialArgs;
+          formatter = pkgs.nixfmt-rfc-style;
+
+          packages.nvfConfig = inputs.nvf.lib.neovimConfiguration {
+            inherit pkgs;
+            modules = [ ./apps/nvf ];
           };
-        }
-      ];
-    in {
-      hp-laptop = lib.nixosSystem {
-        system = "x86_64-linux";
-        inherit specialArgs;
-        modules =
-          [
-            ./systems/hp-laptop/configuration.nix
-            ./users/brandon.nix
-            ./themes/catppuccin.nix
-            ./wm/i3.nix
-          ]
-          ++ commonModules;
-      };
-      manta = lib.nixosSystem {
-        system = "x86_64-linux";
-        inherit specialArgs;
-        modules =
-          [
-            ./themes/catppuccin.nix
-            ./users/jelly.nix
-            ./systems/manta/configuration.nix
-          ]
-          ++ commonModules;
-      };
-      wsl = lib.nixosSystem {
-        system = "x86_64-linux";
-        inherit specialArgs;
-        modules = [
-          inputs.sops-nix.nixosModules.sops
-          {
-            sops.age.sshKeyPaths = ["/var/lib/sops-nix/ssh_host_ed25519_key"];
-          }
-          {
-            programs.ssh.startAgent = true;
-          }
-          ./apps/common.nix
-          ./users/common.nix
-          ./users/brandon.nix
-          ./themes/catppuccin.nix
-          inputs.nixos-wsl.nixosModules.default
-          {
-            system.stateVersion = "24.05";
-            wsl.enable = true;
-            wsl.defaultUser = "brandon";
-            networking.hostName = "wsl";
-            nix.settings.experimental-features = ["nix-command" "flakes"];
-          }
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = specialArgs;
+        };
+      flake = {
+        nixosConfigurations =
+          let
+            specialArgs = {
+              inherit inputs;
+              inherit (inputs.self) outputs;
             };
-          }
-        ];
+            commonModules = [
+              inputs.sops-nix.nixosModules.sops
+              ./apps/common.nix
+              ./users/common.nix
+              ./systems/common.nix
+              inputs.home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = specialArgs;
+                };
+              }
+            ];
+            inherit (inputs.nixpkgs) lib;
+          in
+          {
+            hp-laptop = lib.nixosSystem {
+              system = "x86_64-linux";
+              inherit specialArgs;
+              modules = [
+                ./systems/hp-laptop/configuration.nix
+                ./users/brandon.nix
+                ./themes/catppuccin.nix
+                ./wm/i3.nix
+              ] ++ commonModules;
+            };
+            manta = lib.nixosSystem {
+              system = "x86_64-linux";
+              inherit specialArgs;
+              modules = [
+                ./themes/catppuccin.nix
+                ./users/jelly.nix
+                ./systems/manta/configuration.nix
+              ] ++ commonModules;
+            };
+            wsl = lib.nixosSystem {
+              system = "x86_64-linux";
+              inherit specialArgs;
+              modules = [
+                inputs.sops-nix.nixosModules.sops
+                {
+                  sops.age.sshKeyPaths = [ "/var/lib/sops-nix/ssh_host_ed25519_key" ];
+                }
+                { programs.ssh.startAgent = true; }
+                ./apps/common.nix
+                ./users/common.nix
+                ./users/brandon.nix
+                ./themes/catppuccin.nix
+                inputs.nixos-wsl.nixosModules.default
+                {
+                  system.stateVersion = "24.05";
+                  wsl.enable = true;
+                  wsl.defaultUser = "brandon";
+                  networking.hostName = "wsl";
+                  nix.settings.experimental-features = [
+                    "nix-command"
+                    "flakes"
+                  ];
+                }
+                inputs.home-manager.nixosModules.home-manager
+                {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    extraSpecialArgs = specialArgs;
+                  };
+                }
+              ];
+            };
+          };
       };
     };
-  };
 }

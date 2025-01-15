@@ -4,7 +4,7 @@ _: {
     keymaps = [
       {
         key = "<C-\\>";
-        mode = ["n"];
+        mode = [ "n" ];
         action = ":Neotree toggle=true<CR>";
         silent = true;
       }
