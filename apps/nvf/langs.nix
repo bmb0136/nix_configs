@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   config.vim = {
     languages = {
       enableLSP = true;
@@ -8,6 +7,7 @@
       enableExtraDiagnostics = true;
 
       nix.enable = true;
+      ruby.enable = true;
       markdown.enable = true;
       rust.enable = true;
       csharp.enable = true;
