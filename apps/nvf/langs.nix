@@ -4,7 +4,7 @@
       enableLSP = true;
       enableTreesitter = true;
       enableFormat = true;
-      enableExtraDiagnostics = true;
+      # enableExtraDiagnostics = true;
 
       nix.enable = true;
       ruby.enable = true;
