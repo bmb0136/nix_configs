@@ -9,7 +9,7 @@
       server.ROOT_URL = "http://git.manta.zt/";
     };
   };
-  services.nginx.virtualHosts = lib.mkIf config.services.nginx.enable {
+  services.nginx = lib.mkIf config.services.nginx.enable {
     virtualHosts."git.manta.zt" = {
       locations."/" = {
         proxyWebsockets = true;
