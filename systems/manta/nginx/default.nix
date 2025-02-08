@@ -5,8 +5,7 @@
     virtualHosts."manta.zt" = {
       default = true;
       locations."/" = {
-        return = ''404 "<p>Not Found :(</p>"'';
-        extraConfig = ''add_header Content-Type text/html;'';
+        alias = ./404.html;
       };
     };
   };

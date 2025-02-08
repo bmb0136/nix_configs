@@ -10,7 +10,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./gitea.nix
-    ./nginx.nix
+    ./nginx
   ];
 
   # Bootloader.
