@@ -5,7 +5,7 @@
     virtualHosts."manta.zt" = {
       default = true;
       locations."/" = {
-        alias = ./404.html;
+        tryFiles = "${./404.html} =404";
       };
     };
   };
