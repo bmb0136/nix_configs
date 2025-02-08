@@ -4,7 +4,7 @@
     recommendedProxySettings = true;
     virtualHosts."manta.zt" = {
       default = true;
-      locations."/".return = "404 Not Found :(";
+      locations."/".return = "404 'Not Found :('";
     };
   };
 }
