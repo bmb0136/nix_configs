@@ -15,7 +15,7 @@
     };
 
     lsp = {
-      # formatOnSave = true;
+      formatOnSave = false;
       lspsaga.enable = true;
       lsplines.enable = true;
     };
