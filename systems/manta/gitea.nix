@@ -8,6 +8,7 @@
     settings = {
       server.ROOT_URL = lib.mkIf config.services.nginx.enable "http://git.manta.zt/";
       service.DISABLE_REGISTRATION = true;
+      repository.ENABLE_PUSH_CREATE_USER = true;
     };
   };
   services.nginx = lib.mkIf config.services.nginx.enable {
