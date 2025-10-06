@@ -7,7 +7,8 @@
       # enableExtraDiagnostics = true;
 
       nix.enable = true;
-      ruby.enable = true;
+      python.enable = true;
+      go.enable = true;
       markdown.enable = true;
       rust.enable = true;
       csharp.enable = true;
