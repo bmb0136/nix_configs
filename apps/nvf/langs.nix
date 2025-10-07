@@ -1,7 +1,8 @@
 {...}: {
   config.vim = {
+    lsp.enable = true;
+
     languages = {
-      enableLSP = true;
       enableTreesitter = true;
       enableFormat = true;
       # enableExtraDiagnostics = true;
@@ -18,7 +19,6 @@
     lsp = {
       formatOnSave = false;
       lspsaga.enable = true;
-      lsplines.enable = true;
     };
 
     debugger.nvim-dap = {
