@@ -14,6 +14,7 @@
       rust.enable = true;
       csharp.enable = true;
       clang.enable = true;
+      ts.enable = true;
     };
 
     lsp = {
