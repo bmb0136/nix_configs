@@ -7,6 +7,7 @@
     extraGroups = [
       "wheel"
       "networkmanager"
+      "docker"
     ];
   };
   home-manager.users.jelly =
